@@ -1,0 +1,30 @@
+# Core Data and Machine Learning
+pandas
+numpy
+scikit-learn
+
+# OCR and Image Processing
+pytesseract
+pdf2image
+opencv-python
+Pillow
+
+# NLP and NER
+spacy
+transformers
+torch
+datasets==2.14.0
+pyarrow==14.0.2
+fsspec==2023.9.2
+evaluate
+accelerate
+sentencepiece
+
+# API
+fastapi
+uvicorn
+
+# Utilities
+tqdm
+python-dotenv
+jupyter
