@@ -1,6 +1,4 @@
-
-
-# Multilingual KYC Named Entity Recognition
+# Multilingual Named Entity Recognition
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)](https://6hdjukgmcud7jdh3rtxihf.streamlit.app/)
 [![Model](https://img.shields.io/badge/Model-Hugging%20Face-FFD21E?style=flat-square&logo=huggingface&logoColor=black)](https://huggingface.co/SoloCode/multilingual-ner)
