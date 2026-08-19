@@ -1,5 +1,3 @@
-Absolutely. Here is a **complete, polished `README.md`** you can copy directly into your repository.
-
 ````markdown
 # Multilingual KYC Named Entity Recognition
 
