@@ -56,4 +56,4 @@ ner_full_pipeline copy.ipynb
 TODO.md
 notebooks\ner_full_pipeline.ipynb
 src/ner/dataset.py
-doc\ner_project_todo.md
+doc/ner_project_todo.md
