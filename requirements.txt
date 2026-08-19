@@ -28,3 +28,4 @@ uvicorn
 tqdm
 python-dotenv
 jupyter
+streamlit

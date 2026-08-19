@@ -55,3 +55,4 @@ venv.bak/
 ner_full_pipeline copy.ipynb
 TODO.md
 notebooks\ner_full_pipeline.ipynb
+src/ner/dataset.py
