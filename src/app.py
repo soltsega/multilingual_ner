@@ -17,7 +17,7 @@ st.set_page_config(
     page_title="Multilingual KYC NER",
     page_icon="◈",
     layout="wide",
-    initial_sidebar_state="collapsed",
+    initial_sidebar_state="expanded",
 )
 
 # ============================================================
@@ -49,23 +49,11 @@ DATASET_INFORMATION = {
 }
 
 # ============================================================
-# NAVIGATION
+# SESSION STATE
 # ============================================================
-
-PAGES = [
-    ("NER Analysis", "✦"),
-    ("Methodology", "◈"),
-    ("Dataset", "▦"),
-    ("Model", "◎"),
-    ("System Architecture", "⌘"),
-    ("Limitations", "△"),
-    ("Future Improvements", "↗"),
-]
 
 if "page" not in st.session_state:
     st.session_state.page = "NER Analysis"
-
-page = st.session_state.page
 
 # ============================================================
 # CUSTOM CSS
@@ -80,50 +68,29 @@ st.markdown(
        ======================================================== */
 
     .stApp {
-        background:
-            radial-gradient(
-                circle at 90% 0%,
-                rgba(99, 102, 241, 0.08),
-                transparent 28%
-            ),
-            radial-gradient(
-                circle at 0% 20%,
-                rgba(14, 165, 233, 0.06),
-                transparent 25%
-            ),
-            #f8fafc;
+        background-color: #f7f8fa;
     }
 
     .block-container {
-        max-width: 1280px;
-        padding-top: 1.4rem;
+        max-width: 1200px;
+        padding-top: 1.5rem;
         padding-bottom: 4rem;
     }
 
-    #MainMenu {
-        visibility: hidden;
-    }
-
-    footer {
-        visibility: hidden;
-    }
-
     /* ========================================================
-       TOP BRAND BAR
+       BRAND BAR
        ======================================================== */
 
     .brand-bar {
         display: flex;
-        align-items: center;
         justify-content: space-between;
-        gap: 1rem;
-        padding: 0.9rem 1.1rem;
-        margin-bottom: 1.25rem;
-        background: rgba(255, 255, 255, 0.92);
-        border: 1px solid #e2e8f0;
-        border-radius: 18px;
-        box-shadow: 0 8px 30px rgba(15, 23, 42, 0.05);
-        backdrop-filter: blur(12px);
+        align-items: center;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        padding: 0.9rem 1.2rem;
+        margin-bottom: 1.8rem;
+        box-shadow: 0 1px 3px rgba(16, 24, 40, 0.05);
     }
 
     .brand-left {
@@ -133,39 +100,37 @@ st.markdown(
     }
 
     .brand-icon {
-        width: 42px;
-        height: 42px;
+        width: 40px;
+        height: 40px;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 12px;
-        color: white;
-        font-size: 1.25rem;
+        border-radius: 10px;
+        background: #eef2ff;
+        color: #4f46e5;
+        font-size: 1.3rem;
         font-weight: 800;
-        background: linear-gradient(135deg, #4f46e5, #7c3aed);
-        box-shadow: 0 7px 18px rgba(79, 70, 229, 0.25);
     }
 
     .brand-name {
-        font-weight: 800;
+        font-weight: 750;
+        color: #111827;
         font-size: 1rem;
-        color: #0f172a;
-        line-height: 1.2;
     }
 
     .brand-caption {
-        color: #64748b;
+        color: #667085;
         font-size: 0.78rem;
-        margin-top: 0.15rem;
+        margin-top: 0.1rem;
     }
 
     .status-pill {
         display: inline-flex;
         align-items: center;
-        gap: 0.4rem;
-        padding: 0.45rem 0.7rem;
+        gap: 0.45rem;
+        padding: 0.42rem 0.75rem;
         border-radius: 999px;
-        background: #ecfdf5;
+        background: #ecfdf3;
         border: 1px solid #bbf7d0;
         color: #166534;
         font-size: 0.78rem;
@@ -173,10 +138,11 @@ st.markdown(
     }
 
     .status-dot {
-        width: 7px;
-        height: 7px;
+        width: 8px;
+        height: 8px;
         border-radius: 50%;
         background: #22c55e;
+        display: inline-block;
     }
 
     /* ========================================================
@@ -184,131 +150,63 @@ st.markdown(
        ======================================================== */
 
     .hero {
-        position: relative;
-        overflow: hidden;
-        padding: 2.5rem 2.5rem;
-        margin-bottom: 1.25rem;
-        border-radius: 24px;
-        color: white;
-        background:
-            radial-gradient(
-                circle at 85% 20%,
-                rgba(255,255,255,0.18),
-                transparent 25%
-            ),
-            linear-gradient(135deg, #312e81 0%, #4f46e5 48%, #7c3aed 100%);
-        box-shadow: 0 18px 45px rgba(79, 70, 229, 0.20);
+        padding: 1rem 0 2rem 0;
     }
 
     .hero-eyebrow {
+        color: #4f46e5;
         font-size: 0.78rem;
-        font-weight: 800;
-        letter-spacing: 0.12em;
         text-transform: uppercase;
-        opacity: 0.8;
-        margin-bottom: 0.8rem;
+        letter-spacing: 0.12em;
+        font-weight: 800;
+        margin-bottom: 0.7rem;
     }
 
     .hero-title {
-        font-size: 2.75rem;
-        font-weight: 850;
+        font-size: 3rem;
+        font-weight: 800;
         letter-spacing: -0.045em;
         line-height: 1.05;
-        margin-bottom: 0.8rem;
+        color: #111827;
+        margin-bottom: 0.7rem;
     }
 
     .hero-subtitle {
-        font-size: 1.05rem;
+        font-size: 1.08rem;
         line-height: 1.7;
+        color: #5b6472;
         max-width: 820px;
-        color: rgba(255,255,255,0.86);
     }
 
     .hero-badge {
         display: inline-block;
-        margin-top: 1.25rem;
-        padding: 0.42rem 0.72rem;
-        border: 1px solid rgba(255,255,255,0.22);
+        margin-top: 1rem;
+        padding: 0.45rem 0.75rem;
         border-radius: 999px;
-        background: rgba(255,255,255,0.10);
+        background: #eef2ff;
+        border: 1px solid #c7d2fe;
+        color: #4338ca;
         font-size: 0.78rem;
-        font-weight: 650;
+        font-weight: 700;
     }
 
     /* ========================================================
-       NAVIGATION
-       ======================================================== */
-
-    .nav-heading {
-        font-size: 0.74rem;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        font-weight: 800;
-        color: #64748b;
-        margin: 0.7rem 0 0.55rem 0.15rem;
-    }
-
-    /* Streamlit button container */
-    div[data-testid="stHorizontalBlock"] button {
-        border-radius: 12px !important;
-    }
-
-    div[data-testid="stHorizontalBlock"] button[kind="secondary"] {
-        background: #ffffff !important;
-        border: 1px solid #e2e8f0 !important;
-        color: #334155 !important;
-        font-weight: 700 !important;
-        min-height: 44px !important;
-        transition: all 0.15s ease !important;
-    }
-
-    div[data-testid="stHorizontalBlock"] button[kind="secondary"]:hover {
-        border-color: #818cf8 !important;
-        color: #4338ca !important;
-        background: #eef2ff !important;
-        transform: translateY(-1px);
-    }
-
-    div[data-testid="stHorizontalBlock"] button[kind="primary"] {
-        background: linear-gradient(
-            135deg,
-            #4f46e5,
-            #7c3aed
-        ) !important;
-        border: 1px solid #4f46e5 !important;
-        color: white !important;
-        font-weight: 800 !important;
-        min-height: 44px !important;
-        box-shadow: 0 6px 16px rgba(79, 70, 229, 0.20);
-    }
-
-    /* ========================================================
-       SECTION HEADINGS
+       SECTIONS
        ======================================================== */
 
     .section-title {
-        font-size: 1.85rem;
-        font-weight: 800;
-        letter-spacing: -0.025em;
-        color: #0f172a;
-        margin-top: 1.3rem;
+        font-size: 1.8rem;
+        font-weight: 750;
+        color: #111827;
+        margin-top: 1.6rem;
         margin-bottom: 0.45rem;
     }
 
     .section-description {
-        color: #64748b;
-        line-height: 1.75;
-        max-width: 900px;
-        margin-bottom: 1.3rem;
-    }
-
-    .page-kicker {
-        color: #4f46e5;
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
-        font-weight: 850;
-        margin-bottom: 0.3rem;
+        color: #667085;
+        line-height: 1.7;
+        margin-bottom: 1.4rem;
+        max-width: 850px;
     }
 
     /* ========================================================
@@ -316,113 +214,38 @@ st.markdown(
        ======================================================== */
 
     .info-card {
-        background: rgba(255,255,255,0.94);
-        border: 1px solid #e2e8f0;
-        border-radius: 16px;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
         padding: 1.25rem;
         height: 100%;
-        box-shadow: 0 5px 20px rgba(15, 23, 42, 0.045);
+        box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
     }
 
     .info-card h3 {
         margin-top: 0;
-        margin-bottom: 0.5rem;
-        font-size: 1.02rem;
-        color: #0f172a;
+        font-size: 1.05rem;
+        color: #111827;
     }
 
     .info-card p {
-        color: #64748b;
+        color: #667085;
         line-height: 1.65;
-        margin-bottom: 0;
-    }
-
-    .metric-card {
-        background: white;
-        border: 1px solid #e2e8f0;
-        border-radius: 16px;
-        padding: 1.2rem;
-        min-height: 125px;
-        box-shadow: 0 5px 20px rgba(15,23,42,0.04);
-    }
-
-    .metric-icon {
-        font-size: 1.35rem;
-        margin-bottom: 0.65rem;
     }
 
     .metric-label {
-        font-size: 0.72rem;
+        font-size: 0.75rem;
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        color: #64748b;
-        font-weight: 750;
+        color: #667085;
+        font-weight: 700;
     }
 
     .metric-value {
-        font-size: 1.18rem;
-        font-weight: 800;
-        color: #0f172a;
+        font-size: 1.25rem;
+        font-weight: 750;
+        color: #111827;
         margin-top: 0.25rem;
-    }
-
-    .metric-description {
-        color: #64748b;
-        font-size: 0.83rem;
-        margin-top: 0.35rem;
-        line-height: 1.45;
-    }
-
-    /* ========================================================
-       ANALYSIS
-       ======================================================== */
-
-    .analysis-shell {
-        background: white;
-        border: 1px solid #e2e8f0;
-        border-radius: 20px;
-        padding: 1.4rem;
-        box-shadow: 0 8px 30px rgba(15,23,42,0.045);
-    }
-
-    .input-label {
-        font-weight: 800;
-        color: #0f172a;
-        margin-bottom: 0.45rem;
-    }
-
-    .example-box {
-        background: #f8fafc;
-        border: 1px dashed #cbd5e1;
-        border-radius: 12px;
-        padding: 0.8rem 1rem;
-        color: #64748b;
-        font-size: 0.82rem;
-        line-height: 1.55;
-        margin-top: 0.5rem;
-    }
-
-    .result-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 1rem;
-        margin: 1.5rem 0 0.8rem 0;
-    }
-
-    .result-title {
-        font-size: 1.2rem;
-        font-weight: 800;
-        color: #0f172a;
-    }
-
-    .result-count {
-        padding: 0.35rem 0.65rem;
-        border-radius: 999px;
-        background: #eef2ff;
-        color: #4338ca;
-        font-size: 0.75rem;
-        font-weight: 800;
     }
 
     /* ========================================================
@@ -430,64 +253,30 @@ st.markdown(
        ======================================================== */
 
     .entity-text {
-        background: white;
-        border: 1px solid #e2e8f0;
-        border-radius: 16px;
-        padding: 1.35rem;
-        line-height: 2.25;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 1.4rem;
+        line-height: 2.1;
         font-size: 1rem;
-        color: #1e293b;
-        box-shadow: 0 5px 20px rgba(15,23,42,0.035);
+        color: #1f2937;
     }
 
     .entity {
         display: inline-block;
-        padding: 0.13rem 0.45rem;
+        padding: 0.12rem 0.42rem;
         margin: 0 0.08rem;
-        border-radius: 7px;
+        border-radius: 6px;
         background: #eef2ff;
         border: 1px solid #c7d2fe;
-        color: #312e81;
-        font-weight: 650;
     }
 
     .entity-label {
-        font-size: 0.65rem;
-        font-weight: 850;
-        color: #4f46e5;
-        margin-left: 0.32rem;
+        font-size: 0.68rem;
+        font-weight: 750;
+        color: #4338ca;
+        margin-left: 0.3rem;
         vertical-align: middle;
-    }
-
-    /* ========================================================
-       NOTICE
-       ======================================================== */
-
-    .notice {
-        border-left: 4px solid #4f46e5;
-        background: #eef2ff;
-        padding: 1rem 1.1rem;
-        border-radius: 0 12px 12px 0;
-        color: #3730a3;
-        line-height: 1.6;
-    }
-
-    .warning {
-        border-left: 4px solid #f59e0b;
-        background: #fffbeb;
-        padding: 1rem 1.1rem;
-        border-radius: 0 12px 12px 0;
-        color: #92400e;
-        line-height: 1.6;
-    }
-
-    .success-box {
-        border-left: 4px solid #10b981;
-        background: #ecfdf5;
-        padding: 1rem 1.1rem;
-        border-radius: 0 12px 12px 0;
-        color: #065f46;
-        line-height: 1.6;
     }
 
     /* ========================================================
@@ -495,117 +284,72 @@ st.markdown(
        ======================================================== */
 
     .pipeline-step {
-        background: white;
-        border: 1px solid #e2e8f0;
-        border-radius: 15px;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
         padding: 1rem;
-        min-height: 135px;
-        box-shadow: 0 5px 18px rgba(15,23,42,0.035);
+        text-align: center;
+        min-height: 125px;
+        box-shadow: 0 1px 2px rgba(16, 24, 40, 0.03);
     }
 
     .pipeline-number {
-        font-size: 0.7rem;
-        color: #6366f1;
-        font-weight: 850;
+        font-size: 0.72rem;
+        color: #667085;
+        font-weight: 750;
         letter-spacing: 0.08em;
     }
 
     .pipeline-title {
-        font-weight: 800;
-        color: #0f172a;
-        margin-top: 0.35rem;
+        font-weight: 750;
+        color: #111827;
+        margin-top: 0.3rem;
     }
 
     .pipeline-description {
-        color: #64748b;
-        font-size: 0.84rem;
-        line-height: 1.5;
+        color: #667085;
+        font-size: 0.86rem;
+        line-height: 1.45;
         margin-top: 0.4rem;
     }
 
     /* ========================================================
-       ARCHITECTURE
+       NOTICES
        ======================================================== */
 
-    .architecture-card {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        background: white;
-        border: 1px solid #e2e8f0;
-        border-radius: 15px;
-        padding: 1rem 1.2rem;
-        box-shadow: 0 5px 18px rgba(15,23,42,0.035);
-    }
-
-    .architecture-number {
-        min-width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 11px;
+    .notice {
+        border-left: 4px solid #4f46e5;
         background: #eef2ff;
-        color: #4338ca;
-        font-weight: 850;
-        font-size: 0.8rem;
+        padding: 1rem 1.1rem;
+        border-radius: 0 10px 10px 0;
+        color: #3730a3;
+        line-height: 1.6;
     }
 
-    .architecture-title {
+    .warning {
+        border-left: 4px solid #d97706;
+        background: #fffbeb;
+        padding: 1rem 1.1rem;
+        border-radius: 0 10px 10px 0;
+        color: #92400e;
+        line-height: 1.6;
+    }
+
+    /* ========================================================
+       SIDEBAR
+       ======================================================== */
+
+    [data-testid="stSidebar"] {
+        border-right: 1px solid #e5e7eb;
+    }
+
+    .sidebar-section-title {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #667085;
         font-weight: 800;
-        color: #0f172a;
-    }
-
-    .architecture-description {
-        color: #64748b;
-        font-size: 0.88rem;
-        line-height: 1.5;
-        margin-top: 0.2rem;
-    }
-
-    /* ========================================================
-       FOOTER
-       ======================================================== */
-
-    .footer-card {
-        text-align: center;
-        padding: 1.5rem;
-        margin-top: 2rem;
-        color: #64748b;
-        font-size: 0.8rem;
-    }
-
-    /* ========================================================
-       MOBILE
-       ======================================================== */
-
-    @media (max-width: 768px) {
-
-        .block-container {
-            padding-left: 1rem;
-            padding-right: 1rem;
-        }
-
-        .hero {
-            padding: 1.6rem;
-            border-radius: 18px;
-        }
-
-        .hero-title {
-            font-size: 2rem;
-        }
-
-        .hero-subtitle {
-            font-size: 0.95rem;
-        }
-
-        .brand-bar {
-            padding: 0.75rem;
-        }
-
-        .status-pill {
-            display: none;
-        }
+        margin-bottom: 0.5rem;
     }
 
     </style>
@@ -620,12 +364,11 @@ st.markdown(
 @st.cache_resource(show_spinner=False)
 def load_ner_pipeline():
     """
-    Load the Hugging Face tokenizer and model once and cache them.
+    Load the Hugging Face tokenizer and model once.
 
-    The model is intentionally loaded only when inference is requested.
-    Streamlit reruns the script when widgets are interacted with, but
-    cache_resource prevents reconstruction of the model during normal
-    reruns.
+    Streamlit reruns the script when widgets change, but
+    cache_resource prevents the model from being reconstructed
+    during normal reruns.
     """
 
     tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
@@ -652,7 +395,7 @@ def load_ner_pipeline():
 # ============================================================
 
 def safe_float(value: Any) -> float:
-    """Convert a confidence value safely to float."""
+    """Safely convert a confidence value to float."""
 
     try:
         return float(value)
@@ -661,13 +404,7 @@ def safe_float(value: Any) -> float:
 
 
 def format_entity_label(label: str) -> str:
-    """
-    Make model labels easier to read.
-
-    Example:
-        B-PERSON -> PERSON
-        PER -> PER
-    """
+    """Convert BIO-style labels into readable labels."""
 
     if not label:
         return "ENTITY"
@@ -678,11 +415,12 @@ def format_entity_label(label: str) -> str:
     return label
 
 
-def highlight_entities(text: str, entities: list[dict]) -> str:
+def highlight_entities(
+    text: str,
+    entities: list[dict],
+) -> str:
     """
-    Highlight detected entities in the original text.
-
-    Uses character offsets returned by the Hugging Face pipeline.
+    Highlight detected entities using character offsets.
     """
 
     if not entities:
@@ -690,7 +428,7 @@ def highlight_entities(text: str, entities: list[dict]) -> str:
 
     sorted_entities = sorted(
         entities,
-        key=lambda item: item.get("start", 0)
+        key=lambda item: item.get("start", 0),
     )
 
     output = []
@@ -717,7 +455,10 @@ def highlight_entities(text: str, entities: list[dict]) -> str:
 
         label = html.escape(
             format_entity_label(
-                entity.get("entity_group", "ENTITY")
+                entity.get(
+                    "entity_group",
+                    "ENTITY",
+                )
             )
         )
 
@@ -740,6 +481,7 @@ def highlight_entities(text: str, entities: list[dict]) -> str:
 
 
 def confidence_level(score: float) -> str:
+    """Human-readable confidence interpretation."""
 
     if score >= 0.90:
         return "High"
@@ -751,32 +493,143 @@ def confidence_level(score: float) -> str:
 
 
 # ============================================================
+# SIDEBAR NAVIGATION
+# ============================================================
+
+with st.sidebar:
+
+    st.markdown(
+        """
+        <div style="
+            font-size:1.05rem;
+            font-weight:800;
+            color:#111827;
+            margin-bottom:0.2rem;
+        ">
+            ◈ Multilingual KYC NER
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.caption(
+        "Research and demonstration system"
+    )
+
+    st.divider()
+
+    st.markdown(
+        '<div class="sidebar-section-title">System</div>',
+        unsafe_allow_html=True,
+    )
+
+    if st.button(
+        "◉  NER Analysis",
+        use_container_width=True,
+        type=(
+            "primary"
+            if st.session_state.page == "NER Analysis"
+            else "secondary"
+        ),
+    ):
+        st.session_state.page = "NER Analysis"
+        st.rerun()
+
+    st.markdown(
+        '<div class="sidebar-section-title">Documentation</div>',
+        unsafe_allow_html=True,
+    )
+
+    documentation_pages = [
+        ("Overview", "Overview"),
+        ("Methodology", "Methodology"),
+        ("Dataset", "Dataset"),
+        ("Constraints & Limitations", "Limitations"),
+        ("Future Improvements", "Future Improvements"),
+        ("System Architecture", "System Architecture"),
+    ]
+
+    for label, value in documentation_pages:
+
+        if st.button(
+            label,
+            use_container_width=True,
+            type=(
+                "primary"
+                if st.session_state.page == value
+                else "secondary"
+            ),
+            key=f"nav_{value}",
+        ):
+            st.session_state.page = value
+            st.rerun()
+
+    st.divider()
+
+    st.markdown(
+        "**Model**"
+    )
+
+    st.caption(
+        MODEL_ID
+    )
+
+    st.markdown(
+        "**Task**"
+    )
+
+    st.caption(
+        "Token classification / NER"
+    )
+
+    st.divider()
+
+    st.caption(
+        "INSA Summer Camp"
+    )
+
+
+page = st.session_state.page
+
+
+# ============================================================
 # TOP BRAND BAR
 # ============================================================
 
 st.markdown(
     """
     <div class="brand-bar">
+
         <div class="brand-left">
-            <div class="brand-icon">◈</div>
+
+            <div class="brand-icon">
+                ◈
+            </div>
+
             <div>
+
                 <div class="brand-name">
                     Multilingual KYC NER
                 </div>
+
                 <div class="brand-caption">
                     INSA Summer Camp · Research & Demonstration
                 </div>
+
             </div>
+
         </div>
 
         <div class="status-pill">
             <span class="status-dot"></span>
             Model Available
         </div>
+
     </div>
     """,
     unsafe_allow_html=True,
 )
+
 
 # ============================================================
 # HERO
@@ -791,11 +644,11 @@ st.markdown(
         </div>
 
         <div class="hero-title">
-            {APP_NAME}
+            {html.escape(APP_NAME)}
         </div>
 
         <div class="hero-subtitle">
-            {APP_SUBTITLE}
+            {html.escape(APP_SUBTITLE)}
         </div>
 
         <div class="hero-badge">
@@ -807,108 +660,25 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# ============================================================
-# NAVIGATION
-# ============================================================
-
-st.markdown(
-    '<div class="nav-heading">Explore the system</div>',
-    unsafe_allow_html=True,
-)
-
-# 4 + 3 navigation layout
-nav_rows = [
-    PAGES[:4],
-    PAGES[4:],
-]
-
-for row in nav_rows:
-
-    columns = st.columns(len(row))
-
-    for column, (label, icon) in zip(columns, row):
-
-        with column:
-
-            is_active = page == label
-
-            if st.button(
-                f"{icon}  {label}",
-                key=f"nav_{label}",
-                type="primary" if is_active else "secondary",
-                use_container_width=True,
-            ):
-
-                st.session_state.page = label
-                st.rerun()
-
-st.divider()
-
-# ============================================================
-# PAGE HEADER
-# ============================================================
-
-page_descriptions = {
-    "NER Analysis": (
-        "Run the trained model on identity-related text and inspect "
-        "the entities, confidence scores, and annotated output."
-    ),
-    "Methodology": (
-        "Understand the data preparation, label alignment, merging, "
-        "tokenization, fine-tuning, and evaluation workflow."
-    ),
-    "Dataset": (
-        "Review the role of the training data, dataset merging, "
-        "label compatibility, and important data constraints."
-    ),
-    "Model": (
-        "Understand the trained multilingual transformer model and "
-        "its role as the NER inference component."
-    ),
-    "System Architecture": (
-        "Explore how the interface, inference pipeline, tokenizer, "
-        "model, and output layer work together."
-    ),
-    "Limitations": (
-        "Understand the boundaries of the current system and how "
-        "its predictions should be interpreted."
-    ),
-    "Future Improvements": (
-        "Review practical improvements across data, modeling, "
-        "document processing, evaluation, and deployment."
-    ),
-}
-
-st.markdown(
-    f'<div class="page-kicker">{page}</div>',
-    unsafe_allow_html=True,
-)
-
-st.markdown(
-    f'<div class="section-description">'
-    f'{page_descriptions[page]}'
-    f'</div>',
-    unsafe_allow_html=True,
-)
 
 # ============================================================
 # NER ANALYSIS
+# DEFAULT PAGE
 # ============================================================
 
 if page == "NER Analysis":
 
     st.markdown(
-        """
-        <div class="analysis-shell">
-            <div class="section-title" style="margin-top:0;">
-                Analyze KYC Text
-            </div>
+        '<div class="section-title">Named Entity Recognition</div>',
+        unsafe_allow_html=True,
+    )
 
-            <div class="section-description">
-                Enter identity-related text below. The trained model
-                will identify candidate entity spans and provide a
-                confidence score for each prediction.
-            </div>
+    st.markdown(
+        """
+        <div class="section-description">
+            Enter identity-related text below. The trained model
+            identifies candidate entity spans and provides a
+            confidence score for each prediction.
         </div>
         """,
         unsafe_allow_html=True,
@@ -925,46 +695,34 @@ if page == "NER Analysis":
         value="",
         placeholder=example_text,
         height=220,
-        help="Enter the text you want the NER model to analyze.",
-        label_visibility="visible",
+        help=(
+            "Enter identity-related text for the NER model "
+            "to analyze."
+        ),
+    )
+
+    st.caption(
+        "Example format: Full Name, Date of Birth, "
+        "Passport Number, and other identity-related fields."
+    )
+
+    analyze = st.button(
+        "Analyze Text",
+        type="primary",
+        use_container_width=True,
     )
 
     st.markdown(
-        f"""
-        <div class="example-box">
-            <strong>Example format</strong><br>
-            Full Name: Abebe Kebede<br>
-            Date of Birth: 12/04/1998<br>
-            Passport Number: ET1234567
+        """
+        <div class="warning" style="margin-top:1rem;">
+            <strong>Important:</strong>
+            NER identifies candidate entities in text. It does not
+            independently verify the authenticity of an identity,
+            document, or piece of information.
         </div>
         """,
         unsafe_allow_html=True,
     )
-
-    st.write("")
-
-    analyze_col, clear_col, spacer = st.columns(
-        [2.0, 1.0, 4.0]
-    )
-
-    with analyze_col:
-
-        analyze = st.button(
-            "✦  Analyze Text",
-            type="primary",
-            use_container_width=True,
-        )
-
-    with clear_col:
-
-        clear = st.button(
-            "Clear",
-            use_container_width=True,
-        )
-
-    if clear:
-
-        st.rerun()
 
     if analyze:
 
@@ -979,37 +737,23 @@ if page == "NER Analysis":
             try:
 
                 with st.spinner(
-                    "Loading the multilingual model and running inference..."
+                    "Running multilingual NER inference..."
                 ):
 
                     ner = load_ner_pipeline()
-
                     results = ner(text)
 
-                st.markdown(
-                    f"""
-                    <div class="success-box">
-                        <strong>Analysis completed.</strong>
-                        {len(results)} entity span(s) detected.
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
+                st.success(
+                    f"Analysis completed. "
+                    f"{len(results)} entity span(s) detected."
                 )
 
                 if results:
 
                     st.markdown(
-                        """
-                        <div class="result-header">
-                            <div class="result-title">
-                                Detected Entities
-                            </div>
-
-                            <div class="result-count">
-                                Entity spans detected
-                            </div>
-                        </div>
-                        """,
+                        '<div class="section-title">'
+                        'Detected Entities'
+                        '</div>',
                         unsafe_allow_html=True,
                     )
 
@@ -1026,12 +770,12 @@ if page == "NER Analysis":
                                 "Entity": format_entity_label(
                                     item.get(
                                         "entity_group",
-                                        "ENTITY"
+                                        "ENTITY",
                                     )
                                 ),
                                 "Text": item.get(
                                     "word",
-                                    ""
+                                    "",
                                 ),
                                 "Confidence": f"{score:.2%}",
                                 "Interpretation": confidence_level(
@@ -1059,17 +803,19 @@ if page == "NER Analysis":
                     )
 
                     st.markdown(
-                        f'<div class="entity-text">'
-                        f'{highlighted}'
-                        f'</div>',
+                        f"""
+                        <div class="entity-text">
+                            {highlighted}
+                        </div>
+                        """,
                         unsafe_allow_html=True,
                     )
 
                     st.caption(
-                        "Confidence indicates the model's prediction "
-                        "score for the detected span. It should not "
-                        "be interpreted as a probability that the "
-                        "identity information is factually correct."
+                        "Confidence represents the model's prediction "
+                        "score for the detected span. It should not be "
+                        "interpreted as a probability that the identity "
+                        "information is factually correct."
                     )
 
                 else:
@@ -1087,116 +833,83 @@ if page == "NER Analysis":
                 with st.expander(
                     "Technical details"
                 ):
-
                     st.code(
                         str(exc)
                     )
 
-    st.write("")
+
+# ============================================================
+# OVERVIEW
+# ============================================================
+
+elif page == "Overview":
+
+    st.markdown(
+        '<div class="section-title">System Overview</div>',
+        unsafe_allow_html=True,
+    )
 
     st.markdown(
         """
-        <div class="notice">
-            <strong>Important:</strong>
-            NER identifies candidate entities in text. It does not
-            independently verify the authenticity of an identity,
-            document, or piece of information.
+        <div class="section-description">
+            This application demonstrates a multilingual named entity
+            recognition system designed to identify structured
+            identity-related information from unstructured KYC text.
+            The interface separates model inference from methodological
+            documentation so that the system's training decisions,
+            constraints, and potential improvements can be examined
+            independently.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
-# ============================================================
-# METHODOLOGY
-# ============================================================
+    col1, col2, col3, col4 = st.columns(4)
 
-elif page == "Methodology":
-
-    st.markdown(
-        '<div class="section-title">End-to-End Methodology</div>',
-        unsafe_allow_html=True,
-    )
-
-    methodology = [
+    cards = [
         (
-            "1",
-            "Dataset Selection",
-            "Relevant annotated NER datasets were selected according "
-            "to entity coverage, language coverage, annotation quality, "
-            "and relevance to the target task.",
+            "Task",
+            "NER",
+            "Token-level identification of relevant entities.",
         ),
         (
-            "2",
-            "Dataset Analysis",
-            "The datasets were examined for label definitions, annotation "
-            "conventions, language distribution, and differences in data "
-            "characteristics.",
+            "Domain",
+            "KYC",
+            "Identity-related information extraction.",
         ),
         (
-            "3",
-            "Label Alignment",
-            "Labels from different sources must represent compatible "
-            "entity meanings before examples are combined. This reduces "
-            "the risk of contradictory supervision.",
+            "Model",
+            "Multilingual",
+            "Transformer-based token classification.",
         ),
         (
-            "4",
-            "Dataset Merging",
-            "Compatible training examples can be combined to increase "
-            "the diversity and coverage of the training corpus.",
-        ),
-        (
-            "5",
-            "Data Splitting",
-            "The resulting corpus is divided into training, validation, "
-            "and test partitions so model development and final "
-            "evaluation remain conceptually separate.",
-        ),
-        (
-            "6",
-            "Tokenization",
-            "Text is converted into the representation required by the "
-            "transformer while preserving the relationship between "
-            "tokens and entity labels.",
-        ),
-        (
-            "7",
-            "Fine-tuning",
-            "A pretrained multilingual transformer is adapted to the "
-            "NER task using the prepared labeled corpus.",
-        ),
-        (
-            "8",
-            "Evaluation",
-            "Model predictions should be evaluated using entity-level "
-            "precision, recall, and F1, preferably broken down by "
-            "language and entity type.",
+            "Output",
+            "Entities",
+            "Recognized spans with confidence scores.",
         ),
     ]
 
-    cols = st.columns(2)
-
-    for index, (number, title, description) in enumerate(
-        methodology
+    for column, (label, value, description) in zip(
+        [col1, col2, col3, col4],
+        cards,
     ):
 
-        with cols[index % 2]:
+        with column:
 
             st.markdown(
                 f"""
-                <div class="info-card"
-                     style="margin-bottom:1rem;">
+                <div class="info-card">
 
-                    <div class="architecture-number">
-                        {number}
+                    <div class="metric-label">
+                        {html.escape(label)}
                     </div>
 
-                    <h3 style="margin-top:0.8rem;">
-                        {title}
-                    </h3>
+                    <div class="metric-value">
+                        {html.escape(value)}
+                    </div>
 
                     <p>
-                        {description}
+                        {html.escape(description)}
                     </p>
 
                 </div>
@@ -1205,54 +918,188 @@ elif page == "Methodology":
             )
 
     st.markdown(
-        '<div class="section-title">Why Dataset Merging Matters</div>',
+        '<div class="section-title">Processing Pipeline</div>',
         unsafe_allow_html=True,
     )
 
-    col1, col2 = st.columns(2)
+    steps = [
+        (
+            "01",
+            "Input",
+            "KYC text is provided to the system.",
+        ),
+        (
+            "02",
+            "Preprocessing",
+            "Input is normalized where required.",
+        ),
+        (
+            "03",
+            "Tokenization",
+            "Text is converted into model-compatible tokens.",
+        ),
+        (
+            "04",
+            "NER Inference",
+            "The fine-tuned transformer predicts entity spans.",
+        ),
+        (
+            "05",
+            "Aggregation",
+            "Token predictions are combined into entities.",
+        ),
+        (
+            "06",
+            "Presentation",
+            "Entities and confidence scores are displayed.",
+        ),
+    ]
 
-    with col1:
+    cols = st.columns(3)
 
-        st.markdown(
-            """
-            <div class="info-card">
+    for index, (number, title, description) in enumerate(steps):
 
-                <h3>Potential Benefit</h3>
+        with cols[index % 3]:
 
-                <p>
-                    A merged corpus can provide broader linguistic
-                    and entity coverage than an individual dataset.
-                    This can expose the model to more varied patterns
-                    during training.
-                </p>
+            st.markdown(
+                f"""
+                <div class="pipeline-step">
 
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+                    <div class="pipeline-number">
+                        {html.escape(number)}
+                    </div>
 
-    with col2:
+                    <div class="pipeline-title">
+                        {html.escape(title)}
+                    </div>
 
-        st.markdown(
-            """
-            <div class="info-card">
+                    <div class="pipeline-description">
+                        {html.escape(description)}
+                    </div>
 
-                <h3>What Must Be Controlled</h3>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
 
-                <p>
+    st.markdown(
+        """
+        <div class="notice" style="margin-top:1.2rem;">
+            <strong>Interpretation principle.</strong>
+            The model identifies candidate entities in text.
+            Entity recognition should not be interpreted as independent
+            verification of the authenticity or truthfulness of the
+            underlying identity information.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+# ============================================================
+# METHODOLOGY
+# ============================================================
+
+elif page == "Methodology":
+
+    st.markdown(
+        '<div class="section-title">Methodology</div>',
+        unsafe_allow_html=True,
+    )
+
+    st.markdown(
+        """
+        <div class="section-description">
+            The system follows a supervised multilingual NER workflow.
+            Each major methodological decision is documented according
+            to its purpose, benefit, and associated constraint.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    methodology = [
+        (
+            "1. Dataset Selection",
+            "Relevant annotated NER datasets were selected according "
+            "to their entity coverage, language coverage, annotation "
+            "quality, and relevance to the target task.",
+        ),
+        (
+            "2. Dataset Analysis",
+            "The datasets were examined for label definitions, "
+            "annotation conventions, language distribution, and "
+            "differences in data characteristics.",
+        ),
+        (
+            "3. Label Alignment",
+            "Labels from different sources must represent a compatible "
+            "entity schema before examples are combined. This reduces "
+            "the risk of contradictory supervision.",
+        ),
+        (
+            "4. Dataset Merging",
+            "Compatible training examples can be combined to increase "
+            "the diversity and coverage of the training corpus.",
+        ),
+        (
+            "5. Data Splitting",
+            "The resulting corpus is divided into training, validation, "
+            "and test partitions so that model development and final "
+            "evaluation remain conceptually separate.",
+        ),
+        (
+            "6. Tokenization",
+            "Text is converted into the token representation required "
+            "by the transformer model while preserving the relationship "
+            "between tokens and entity labels.",
+        ),
+        (
+            "7. Fine-tuning",
+            "A pretrained multilingual transformer is adapted to the "
+            "NER task using the prepared labeled corpus.",
+        ),
+        (
+            "8. Evaluation",
+            "Model predictions should be evaluated using entity-level "
+            "precision, recall, and F1, preferably broken down by "
+            "language and entity type.",
+        ),
+    ]
+
+    for title, description in methodology:
+
+        with st.expander(title):
+
+            st.write(description)
+
+            if title == "4. Dataset Merging":
+
+                st.markdown(
+                    """
+                    ### Why merging matters
+
+                    A merged corpus can provide broader linguistic and
+                    entity coverage than an individual dataset. This can
+                    give the model exposure to a wider range of examples.
+
+                    ### What must be controlled
+
                     Merging is not automatically beneficial. Differences
                     in label definitions, annotation quality, language
                     distribution, and domain can introduce noise or
                     inconsistent supervision.
-                </p>
 
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+                    ### Key principle
+
+                    Datasets should be merged only after their annotation
+                    schemes and entity definitions have been examined for
+                    compatibility.
+                    """
+                )
 
     st.markdown(
-        '<div class="section-title">BIO Tagging</div>',
+        '<div class="section-title">Why This Pipeline?</div>',
         unsafe_allow_html=True,
     )
 
@@ -1261,27 +1108,22 @@ elif page == "Methodology":
         <div class="info-card">
 
         <p>
-        The BIO scheme represents entity boundaries at the token level.
-        <strong>B</strong> identifies the beginning of an entity,
-        <strong>I</strong> identifies a continuation of an entity, and
-        <strong>O</strong> represents a token outside an entity.
+        The pipeline separates data preparation from model inference.
+        This is important because errors introduced during dataset
+        construction or label alignment can propagate into training
+        and affect downstream model performance.
         </p>
 
-        <br>
-
-        <code>
-        Solomon → B-PERSON<br>
-        Tsega → I-PERSON<br>
-        lives → O<br>
-        in → O<br>
-        Addis → B-LOCATION<br>
-        Ababa → I-LOCATION
-        </code>
+        <p>
+        Treating each stage as an explicit component makes the system
+        easier to evaluate, reproduce, explain, and improve.
+        </p>
 
         </div>
         """,
         unsafe_allow_html=True,
     )
+
 
 # ============================================================
 # DATASET
@@ -1290,7 +1132,19 @@ elif page == "Methodology":
 elif page == "Dataset":
 
     st.markdown(
-        '<div class="section-title">Training Data</div>',
+        '<div class="section-title">Dataset</div>',
+        unsafe_allow_html=True,
+    )
+
+    st.markdown(
+        """
+        <div class="section-description">
+            The training data determines what the model can learn.
+            Dataset documentation therefore records the sources,
+            standardization decisions, merging strategy, and constraints
+            associated with the resulting training corpus.
+        </div>
+        """,
         unsafe_allow_html=True,
     )
 
@@ -1305,10 +1159,10 @@ elif page == "Dataset":
                 <h3>Dataset Sources</h3>
 
                 <p>
-                    The exact dataset names, versions, licenses,
-                    language coverage, and sample counts should be
-                    documented here according to the final training
-                    notebook.
+                The exact dataset names, versions, licenses, language
+                coverage, and sample counts should be documented here.
+                These values should correspond to the actual training
+                notebooks and dataset preparation process.
                 </p>
 
             </div>
@@ -1325,10 +1179,10 @@ elif page == "Dataset":
                 <h3>Why Multiple Sources?</h3>
 
                 <p>
-                    Combining compatible datasets can increase the
-                    diversity of examples available during training.
-                    The benefit depends on consistent entity definitions
-                    and annotation quality.
+                Combining compatible datasets can increase the diversity
+                of examples available during training. The benefit,
+                however, depends on consistent entity definitions,
+                annotation quality, and language coverage.
                 </p>
 
             </div>
@@ -1354,338 +1208,41 @@ elif page == "Dataset":
     )
 
     st.markdown(
-        '<div class="section-title">Dataset Quality Checks</div>',
-        unsafe_allow_html=True,
-    )
-
-    checks = [
-        "Equivalent labels should have equivalent meanings.",
-        "Annotation boundaries should be compatible.",
-        "Entity types should be mapped consistently.",
-        "One dataset should not unintentionally dominate the merged distribution.",
-        "Language-specific differences should be preserved.",
-        "Duplicate and near-duplicate examples should be investigated.",
-        "Licensing conditions should be compatible.",
-    ]
-
-    for check in checks:
-
-        st.markdown(
-            f"""
-            <div class="info-card"
-                 style="margin-bottom:0.6rem;padding:0.9rem 1rem;">
-
-                <strong>✓</strong>
-                &nbsp; {check}
-
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-    st.markdown(
-        """
-        <div class="warning" style="margin-top:1rem;">
-            A merged dataset is useful only when the resulting
-            supervision remains coherent. Increasing the number
-            of examples alone does not guarantee better model
-            performance.
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-# ============================================================
-# MODEL
-# ============================================================
-
-elif page == "Model":
-
-    st.markdown(
-        '<div class="section-title">Trained NER Model</div>',
-        unsafe_allow_html=True,
-    )
-
-    col1, col2, col3 = st.columns(3)
-
-    with col1:
-
-        st.markdown(
-            """
-            <div class="metric-card">
-
-                <div class="metric-icon">◎</div>
-
-                <div class="metric-label">
-                    Model Type
-                </div>
-
-                <div class="metric-value">
-                    Transformer
-                </div>
-
-                <div class="metric-description">
-                    Fine-tuned for token classification.
-                </div>
-
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-    with col2:
-
-        st.markdown(
-            """
-            <div class="metric-card">
-
-                <div class="metric-icon">◈</div>
-
-                <div class="metric-label">
-                    Task
-                </div>
-
-                <div class="metric-value">
-                    NER
-                </div>
-
-                <div class="metric-description">
-                    Multilingual named entity recognition.
-                </div>
-
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-    with col3:
-
-        st.markdown(
-            """
-            <div class="metric-card">
-
-                <div class="metric-icon">↗</div>
-
-                <div class="metric-label">
-                    Model Hub
-                </div>
-
-                <div class="metric-value">
-                    Hugging Face
-                </div>
-
-                <div class="metric-description">
-                    Published model artifact.
-                </div>
-
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-    st.markdown(
-        '<div class="section-title">Model Identifier</div>',
-        unsafe_allow_html=True,
-    )
-
-    st.code(
-        MODEL_ID,
-        language="text",
-    )
-
-    st.markdown(
-        """
-        <div class="notice">
-            The application loads the trained model from the Hugging
-            Face Model Hub only when inference is requested. The
-            resource is cached using Streamlit's resource cache so
-            normal widget interactions do not reconstruct the model.
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    st.markdown(
-        '<div class="section-title">Inference Flow</div>',
-        unsafe_allow_html=True,
-    )
-
-    model_steps = [
-        (
-            "01",
-            "Input Text",
-            "Identity-related text is supplied by the user.",
-        ),
-        (
-            "02",
-            "Tokenizer",
-            "The text is converted into model-compatible tokens.",
-        ),
-        (
-            "03",
-            "Transformer",
-            "The fine-tuned multilingual model generates token-level predictions.",
-        ),
-        (
-            "04",
-            "Aggregation",
-            "Token predictions are combined into entity spans.",
-        ),
-        (
-            "05",
-            "Output",
-            "Entities and confidence scores are presented to the user.",
-        ),
-    ]
-
-    for number, title, description in model_steps:
-
-        st.markdown(
-            f"""
-            <div class="architecture-card"
-                 style="margin-bottom:0.7rem;">
-
-                <div class="architecture-number">
-                    {number}
-                </div>
-
-                <div>
-                    <div class="architecture-title">
-                        {title}
-                    </div>
-
-                    <div class="architecture-description">
-                        {description}
-                    </div>
-                </div>
-
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-# ============================================================
-# SYSTEM ARCHITECTURE
-# ============================================================
-
-elif page == "System Architecture":
-
-    st.markdown(
-        '<div class="section-title">System Architecture</div>',
+        '<div class="section-title">'
+        'Dataset Merging: What Matters'
+        '</div>',
         unsafe_allow_html=True,
     )
 
     st.markdown(
         """
-        <div class="section-description">
-        The application separates presentation, model loading,
-        tokenization, inference, and output formatting. This allows
-        the interface and supporting documentation to evolve without
-        changing the trained model itself.
+        <div class="info-card">
+
+        <p>
+        Before merging datasets, the following questions should be
+        answered:
+        </p>
+
+        <ol>
+            <li>Do equivalent labels have equivalent meanings?</li>
+            <li>Are annotation boundaries defined consistently?</li>
+            <li>Are the same entity types represented across sources?</li>
+            <li>Does one dataset dominate the merged distribution?</li>
+            <li>Are language-specific differences being preserved?</li>
+            <li>Are duplicate or near-duplicate examples present?</li>
+            <li>Are licensing conditions compatible?</li>
+        </ol>
+
+        <p>
+        A merged dataset is useful only when the resulting supervision
+        remains coherent.
+        </p>
+
         </div>
         """,
         unsafe_allow_html=True,
     )
 
-    architecture = [
-        (
-            "User Interface",
-            "Streamlit provides the interaction layer for text input, "
-            "results, visualization, and project documentation.",
-        ),
-        (
-            "Inference Layer",
-            "The application sends input text to the NER pipeline and "
-            "receives entity spans and confidence scores.",
-        ),
-        (
-            "Tokenizer",
-            "The tokenizer converts text into the representation expected "
-            "by the transformer model.",
-        ),
-        (
-            "Multilingual NER Model",
-            f"{MODEL_ID} provides the fine-tuned token classification model.",
-        ),
-        (
-            "Output Layer",
-            "Predictions are transformed into human-readable entity "
-            "tables and annotated text.",
-        ),
-    ]
-
-    for index, (title, description) in enumerate(
-        architecture,
-        1,
-    ):
-
-        st.markdown(
-            f"""
-            <div class="architecture-card"
-                 style="margin-bottom:0.75rem;">
-
-                <div class="architecture-number">
-                    {index:02d}
-                </div>
-
-                <div>
-
-                    <div class="architecture-title">
-                        {title}
-                    </div>
-
-                    <div class="architecture-description">
-                        {description}
-                    </div>
-
-                </div>
-
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-    st.markdown(
-        '<div class="section-title">Deployment Flow</div>',
-        unsafe_allow_html=True,
-    )
-
-    deployment = [
-        ("01", "GitHub", "Application source code"),
-        ("02", "Streamlit", "Hosted user interface"),
-        ("03", "Hugging Face", "Trained model artifact"),
-        ("04", "Inference", "Entity extraction"),
-    ]
-
-    cols = st.columns(4)
-
-    for column, (number, title, description) in zip(
-        cols,
-        deployment,
-    ):
-
-        with column:
-
-            st.markdown(
-                f"""
-                <div class="pipeline-step">
-
-                    <div class="pipeline-number">
-                        {number}
-                    </div>
-
-                    <div class="pipeline-title">
-                        {title}
-                    </div>
-
-                    <div class="pipeline-description">
-                        {description}
-                    </div>
-
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
 
 # ============================================================
 # LIMITATIONS
@@ -1694,7 +1251,20 @@ elif page == "System Architecture":
 elif page == "Limitations":
 
     st.markdown(
-        '<div class="section-title">Constraints & Limitations</div>',
+        '<div class="section-title">'
+        'Constraints & Limitations'
+        '</div>',
+        unsafe_allow_html=True,
+    )
+
+    st.markdown(
+        """
+        <div class="section-description">
+            A reliable ML system should document where its assumptions
+            stop. The following limitations should be considered when
+            interpreting predictions.
+        </div>
+        """,
         unsafe_allow_html=True,
     )
 
@@ -1741,24 +1311,10 @@ elif page == "Limitations":
 
     for title, description in limitations:
 
-        with st.expander(
-            f"△  {title}",
-            expanded=False,
-        ):
+        with st.expander(title):
 
             st.write(description)
 
-    st.markdown(
-        """
-        <div class="warning" style="margin-top:1.2rem;">
-            <strong>Core constraint:</strong>
-            The system is an information-extraction component.
-            It should not be treated as a complete KYC verification,
-            authentication, or fraud-detection system.
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
 
 # ============================================================
 # FUTURE IMPROVEMENTS
@@ -1767,7 +1323,21 @@ elif page == "Limitations":
 elif page == "Future Improvements":
 
     st.markdown(
-        '<div class="section-title">Potential Improvements</div>',
+        '<div class="section-title">'
+        'Potential Improvements'
+        '</div>',
+        unsafe_allow_html=True,
+    )
+
+    st.markdown(
+        """
+        <div class="section-description">
+            Future development should target measurable weaknesses
+            rather than adding functionality solely for presentation.
+            The following improvements are organized according to
+            the part of the system they would affect.
+        </div>
+        """,
         unsafe_allow_html=True,
     )
 
@@ -1806,59 +1376,124 @@ elif page == "Future Improvements":
         ],
     }
 
-    categories = list(improvements.items())
+    for category, items in improvements.items():
 
-    cols = st.columns(2)
+        with st.expander(category, expanded=True):
 
-    for index, (category, items) in enumerate(categories):
+            for item in items:
+                st.markdown(
+                    f"- {item}"
+                )
 
-        with cols[index % 2]:
 
-            items_html = "".join(
-                f"<li>{item}</li>"
-                for item in items
-            )
+# ============================================================
+# SYSTEM ARCHITECTURE
+# ============================================================
+
+elif page == "System Architecture":
+
+    st.markdown(
+        '<div class="section-title">'
+        'System Architecture'
+        '</div>',
+        unsafe_allow_html=True,
+    )
+
+    st.markdown(
+        """
+        <div class="section-description">
+            The application separates presentation, model loading,
+            and inference concerns. This allows the interface and
+            supporting documentation to evolve without changing the
+            trained model.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    architecture = [
+        (
+            "User Interface",
+            "Streamlit provides the interaction layer for text input, "
+            "results, visualization, and documentation.",
+        ),
+        (
+            "Inference Layer",
+            "The application sends input text to the NER pipeline and "
+            "receives entity spans and confidence scores.",
+        ),
+        (
+            "Tokenizer",
+            "The tokenizer converts text into the representation expected "
+            "by the transformer model.",
+        ),
+        (
+            "Multilingual NER Model",
+            f"{MODEL_ID} provides the fine-tuned token classification model.",
+        ),
+        (
+            "Output Layer",
+            "Predictions are transformed into human-readable entity "
+            "tables and annotated text.",
+        ),
+    ]
+
+    for index, (title, description) in enumerate(
+        architecture,
+        1,
+    ):
+
+        col1, col2 = st.columns([1, 5])
+
+        with col1:
 
             st.markdown(
                 f"""
-                <div class="info-card"
-                     style="margin-bottom:1rem;">
+                <div class="pipeline-step">
 
-                    <h3>{category}</h3>
+                    <div class="pipeline-number">
+                        COMPONENT {index}
+                    </div>
 
-                    <ul style="
-                        color:#64748b;
-                        line-height:1.8;
-                        padding-left:1.2rem;
-                    ">
-                        {items_html}
-                    </ul>
+                    <div class="pipeline-title">
+                        {html.escape(title)}
+                    </div>
 
                 </div>
                 """,
                 unsafe_allow_html=True,
             )
 
-    st.markdown(
-        """
-        <div class="notice">
-            Future development should target measurable weaknesses
-            rather than adding functionality solely for presentation.
-            The strongest improvements should be validated through
-            better data, stronger evaluation, and improved deployment
-            reliability.
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+        with col2:
+
+            st.markdown(
+                f"""
+                <div class="info-card">
+
+                    <p>
+                        {html.escape(description)}
+                    </p>
+
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
 
 # ============================================================
 # FOOTER
 # ============================================================
 
+st.divider()
+
 st.markdown(
     """
-    <div class="footer-card">
+    <div style="
+        text-align:center;
+        color:#667085;
+        font-size:0.82rem;
+        line-height:1.7;
+    ">
 
         <strong>Multilingual KYC NER</strong><br>
 
