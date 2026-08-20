@@ -754,7 +754,7 @@ def confidence_level(score: float) -> str:
 # TOP BRAND BAR
 # ============================================================
 
-st.markdown(
+st.html(
     """
     <div class="brand-bar">
         <div class="brand-left">
@@ -775,14 +775,13 @@ st.markdown(
         </div>
     </div>
     """,
-    unsafe_allow_html=True,
 )
 
 # ============================================================
 # HERO
 # ============================================================
 
-st.markdown(
+st.html(
     f"""
     <div class="hero">
 
@@ -804,7 +803,6 @@ st.markdown(
 
     </div>
     """,
-    unsafe_allow_html=True,
 )
 
 # ============================================================
@@ -884,11 +882,10 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.markdown(
+st.html(
     f'<div class="section-description">'
     f'{page_descriptions[page]}'
-    f'</div>',
-    unsafe_allow_html=True,
+    f'</div>'
 )
 
 # ============================================================
@@ -897,7 +894,7 @@ st.markdown(
 
 if page == "NER Analysis":
 
-    st.markdown(
+    st.html(
         """
         <div class="analysis-shell">
             <div class="section-title" style="margin-top:0;">
@@ -910,8 +907,7 @@ if page == "NER Analysis":
                 confidence score for each prediction.
             </div>
         </div>
-        """,
-        unsafe_allow_html=True,
+        """
     )
 
     example_text = (
@@ -929,7 +925,7 @@ if page == "NER Analysis":
         label_visibility="visible",
     )
 
-    st.markdown(
+    st.html(
         f"""
         <div class="example-box">
             <strong>Example format</strong><br>
@@ -937,8 +933,7 @@ if page == "NER Analysis":
             Date of Birth: 12/04/1998<br>
             Passport Number: ET1234567
         </div>
-        """,
-        unsafe_allow_html=True,
+        """
     )
 
     st.write("")
@@ -1094,7 +1089,7 @@ if page == "NER Analysis":
 
     st.write("")
 
-    st.markdown(
+    st.html(
         """
         <div class="notice">
             <strong>Important:</strong>
@@ -1102,8 +1097,7 @@ if page == "NER Analysis":
             independently verify the authenticity of an identity,
             document, or piece of information.
         </div>
-        """,
-        unsafe_allow_html=True,
+        """
     )
 
 # ============================================================
@@ -1856,7 +1850,7 @@ elif page == "Future Improvements":
 # FOOTER
 # ============================================================
 
-st.markdown(
+st.html(
     """
     <div class="footer-card">
 
@@ -1873,5 +1867,4 @@ st.markdown(
 
     </div>
     """,
-    unsafe_allow_html=True,
 )
